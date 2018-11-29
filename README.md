@@ -10,8 +10,8 @@ towards helping the creators get familiar with node/express.js projects.
 Proposed features of Flymail Application
 
 ###
-- User can Signup <br>
-- User can Login <br>
+- Users can Signup <br>
+- Users can Login <br>
 - Users can create a parcel delivery order<br>
 - User can get all available menu <br>
 - Users can change the destination of a parcel delivery order<br>
