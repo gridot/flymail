@@ -1,0 +1,28 @@
+{
+  "name": "flymail",
+  "version": "1.0.0",
+  "description": "Flymail is a courier service that helps users deliver parcels to different destinations. In addition to that, the project is also geared towards helping the creators get familiar with node/express.js projects.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kellswork/flymail.git"
+  },
+  "keywords": [
+    "express",
+    "node",
+    "api"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Kellswork/flymail/issues"
+  },
+  "homepage": "https://github.com/Kellswork/flymail#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4"
+  }
+}
