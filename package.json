@@ -1,0 +1,30 @@
+{
+  "name": "flymail",
+  "version": "1.0.0",
+  "description": "Flymail is a courier service that helps users deliver parcels to different destinations.",
+  "main": "app.json",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gridot/flymail.git"
+  },
+  "keywords": [
+    "courier",
+    "google",
+    "map"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gridot/flymail/issues"
+  },
+  "homepage": "https://github.com/gridot/flymail#readme",
+  "devDependencies": {
+    "nodemon": "^1.18.7"
+  },
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}
