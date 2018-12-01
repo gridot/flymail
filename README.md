@@ -4,7 +4,9 @@
 Flymail is a courier service that helps users deliver parcels to different destinations. In addition to that, the project is also geared
 towards helping the creators get familiar with node/express.js projects.
 
-<br/><b>Pivotal Tracker Stories (PROJECT PLAN)</b> <b>https://www.pivotaltracker.com/n/projects/2228843<br/>
+<br/><b>Pivotal Tracker Stories (PROJECT PLAN)</br> https://www.pivotaltracker.com/n/projects/2228843
+<br/><b>Hosted API on Heroku: </br> https://gritdot.herokuapp.com/
+
 
 ## Features
 Proposed features of Flymail Application
