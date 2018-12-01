@@ -15,7 +15,10 @@
     "google",
     "map"
   ],
-  "author": "",
+  "contributors": [
+    { "name": "Kelechi", "url": "https://github.com/Kellswork" },
+    { "name": "Joyce", "url": "https://github.com/Joyce-O" }
+  ],
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/gridot/flymail/issues"
