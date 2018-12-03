@@ -1,7 +1,7 @@
-import { createUser, queryUsersByEmail } from '../db/sqlQueries';
+import { createUser, queryUsersByEmail } from '../db/sql';
 import bcrypt, { compareSync } from 'bcrypt';
 
-import {generateToken} from '../middlewares/authentication';
+import {generateToken} from '../middleware/authentication';
 import pool from '../db/connection';
 
 class UserHandler {

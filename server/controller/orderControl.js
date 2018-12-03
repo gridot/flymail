@@ -1,5 +1,5 @@
 import pool from '../db/connection';
-import { createOrder } from '../db/sqlQueries';
+import { createOrder } from '../db/sql';
 import shortid from 'shortid';
 
 class OrderHandler {
@@ -33,6 +33,6 @@ class OrderHandler {
     }
 } 
   
-const { parcelOrders } = orderHandler;
+const { parcelOrders } = OrderHandler;
 
 export default parcelOrders;
