@@ -4,10 +4,13 @@
   "description": "Flymail is a courier service that helps users deliver parcels to different destinations.",
   "main": "app.json",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon --exec babel-node -- app.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "tables": "babel-node -- ./server/db/tables"
   },
   "engines": {
-    "node": "10.5.0"
+    "node": "10.5.0",
+    "npm": "6.1.0"
   },
   "repository": {
     "type": "git",
@@ -19,8 +22,14 @@
     "map"
   ],
   "contributors": [
-    { "name": "Kelechi", "url": "https://github.com/Kellswork" },
-    { "name": "Joyce", "url": "https://github.com/Joyce-O" }
+    {
+      "name": "Kelechi",
+      "url": "https://github.com/Kellswork"
+    },
+    {
+      "name": "Joyce",
+      "url": "https://github.com/Joyce-O"
+    }
   ],
   "license": "ISC",
   "bugs": {
@@ -31,6 +40,15 @@
     "nodemon": "^1.18.7"
   },
   "dependencies": {
-    "express": "^4.16.4"
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.7.0",
+    "babel-register": "^6.26.0",
+    "bcrypt": "^3.0.2",
+    "body-parser": "^1.18.3",
+    "dotenv": "^6.1.0",
+    "express": "^4.16.4",
+    "jsonwebtoken": "^8.4.0",
+    "pg": "^7.7.1"
   }
 }
