@@ -1,7 +1,7 @@
-import { createUser, queryUsersByEmail } from '../db/sql';
 import bcrypt, { compareSync } from 'bcrypt';
+import { createUser, queryUsersByEmail } from '../db/sql';
 
-import {generateToken} from '../middleware/authentication';
+import { generateToken } from '../middleware/authentication';
 import pool from '../db/connection';
 
 class UserHandler {
@@ -18,16 +18,16 @@ class UserHandler {
         const authUser = data.rows[0];
         const username = authUser.email.split('@')[0];
         const token = generateToken(authUser);
-        let {name, email, registered} = authUser;
-        let Details = {name,email,registered}
-      
+        const { name, email, registered } = authUser;
+        const Details = { name, email, registered };
+
         return response.status(201)
           .json({
             success: true,
             message: 'Sign up is successful',
-           token: token,
-           Details
-           
+            token,
+            Details
+
           });
       })
       .catch(error => response.status(500)

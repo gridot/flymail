@@ -4,13 +4,14 @@
   "description": "Flymail is a courier service that helps users deliver parcels to different destinations.",
   "main": "app.json",
   "scripts": {
+    "start:dev": "node app.js",
     "start": "nodemon --exec babel-node -- app.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "tables": "babel-node -- ./server/db/tables"
   },
   "engines": {
-    "node": "10.5.0",
-    "npm": "6.1.0"
+    "node": "10.8.0",
+    "npm": "6.2.0"
   },
   "repository": {
     "type": "git",

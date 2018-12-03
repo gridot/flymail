@@ -7,34 +7,34 @@ const generateToken = (payload) => {
 };
 
 const verifyToken = (request, response, next) => {
-    const token = request.headers.authorization || request.body.token;
-    if (!token) {
-      return response.status(403)
-        .json({
-          success: false,
-          message: 'Please supply a token',
-        });
-    }
-    jwt.verify(token, process.env.JWT_SECRET, (error, authData) => {
-      console.log(authData);
-      if (error) {
-        if (error.message.includes('signature')) {
-          return response.status(403)
-            .json({
-              success: false,
-              message: 'Your value is not a valid token. Please supply a valid one',
-            });
-        }
+  const token = request.headers.authorization || request.body.token;
+  if (!token) {
+    return response.status(403)
+      .json({
+        success: false,
+        message: 'Please supply a token',
+      });
+  }
+  jwt.verify(token, process.env.JWT_SECRET, (error, authData) => {
+    console.log(authData);
+    if (error) {
+      if (error.message.includes('signature')) {
         return response.status(403)
           .json({
-            message: "error here"
+            success: false,
+            message: 'Your value is not a valid token. Please supply a valid one',
           });
       }
-      request.authData = authData;
-      return next();
-    });
+      return response.status(403)
+        .json({
+          message: 'error here'
+        });
+    }
+    request.authData = authData;
+    return next();
+  });
 };
 
 export {
-    generateToken, verifyToken
+  generateToken, verifyToken
 };
