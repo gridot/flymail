@@ -6,5 +6,5 @@ const createOrder = 'insert into parcelTable (user_id, parcelContent, price, tra
 
 
 export {
-    createUser, queryUsersByEmail, createOrder
+  createUser, queryUsersByEmail, createOrder
 };
