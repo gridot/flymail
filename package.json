@@ -5,8 +5,6 @@
   "main": "app.json",
   "scripts": {
     "start": "nodemon --exec babel-node -- app.js",
-    "build": "babel server/ --out-dir dist",
-    "host-on-heroku": "npm run build && node ./dist/app.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "tables": "babel-node -- ./server/db/tables"  
   },
