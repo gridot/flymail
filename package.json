@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nodemon --exec babel-node -- app.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "tables": "babel-node -- ./server/db/tables"  
+    "tables": "babel-node -- ./server/db/tables"
   },
   "engines": {
     "node": "10.8.0",
@@ -38,8 +38,7 @@
   "homepage": "https://github.com/gridot/flymail#readme",
   "devDependencies": {
     "eslint": "^5.9.0",
-    "eslint-plugin-import": "^2.14.0",
-    "nodemon": "^1.18.7"
+    "eslint-plugin-import": "^2.14.0"
   },
   "dependencies": {
     "babel-cli": "^6.26.0",
@@ -52,6 +51,7 @@
     "eslint-config-airbnb-base": "^13.1.0",
     "express": "^4.16.4",
     "jsonwebtoken": "^8.4.0",
+    "nodemon": "^1.18.7",
     "pg": "^7.7.1",
     "shortid": "^2.2.14"
   }
