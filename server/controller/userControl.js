@@ -1,6 +1,5 @@
 import bcrypt, { compareSync } from 'bcrypt';
-import { createUser, queryUsersByEmail } from '../db/sql';
-import validateUser from '../middleware/userValidation';
+import { createUser } from '../db/sql';
 
 import { generateToken } from '../middleware/authentication';
 import pool from '../db/connection';
@@ -15,14 +14,6 @@ class UserHandler {
       bcrypt.hashSync(request.body.password, 10)
     ];
 
-    const { error } = validateUser(request.body);
-    if (error) {
-      const errorMessage = error.details.map(element => element.message);
-      return response.status(400).json({
-        success: false,
-        error: errorMessage,
-      });
-    }
     pool.query(createUser, values)
       .then((data) => {
         const authUser = data.rows[0];
