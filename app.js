@@ -16,7 +16,6 @@ app.use('/api/v1', orderRouter);
 app.use('/', router);
 
 const port = process.env.PORT || 5400;
-// "coverage": "nyc report --reporter=text-lcov | coveralls",
 
 app.listen(port, () => console.log(`Flymail is listening on port ${port}`));
 
