@@ -34,13 +34,14 @@ class Validator {
               errors
             });
           }
-      next()      
+      next()     
+    }) 
       .catch(error => response.status(500)
         .json({
           success: false,
           message: error.message
         }));
-      });
+      
   }
 }
 
