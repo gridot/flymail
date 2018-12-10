@@ -38,7 +38,7 @@ const sql = 'insert into userTable (firstName, lastName, email, isAdmin, passwor
 const password = bcrypt.hashSync('admindot', 10);
 const variables = ['Admin', 'gritdot', 'gritdot@gmail.com', 'true', password];
 
-// class tableHandler {
+
 async function createTables() {
   const users = await pool.query(createUserTable);
   try {
@@ -52,19 +52,26 @@ async function createTables() {
   } catch (error) {
     console.log('parcel table not created');
   }
+  const admin = await pool.query(sql, variables);
+  try {
+    console.log('Admin inserted', admin);
+  } catch (error) {
+    console.log('Admin insertion failed');
+  }
+
 }
 
-function createAdmin() {
-  const create = pool.query(sql, variables)
-    .then((result => console.log(`Admin account ${result.command}ED`)))
-    .catch((error) => {
-      console.log(error);
-    });
-  return create;
-}
+// function createAdmin() {
+//   const create = pool.query(sql, variables)
+//     .then((result => console.log(`Admin account ${result.command}ED`)))
+//     .catch((error) => {
+//       console.log(error);
+//     });
+//   return create;
+// }
 // }
 
 // const { defaultTables, createAdmin } = tableHandler;
 createTables();
-createAdmin();
-export { createTables, createAdmin };
+// createAdmin();
+export default createTables;
