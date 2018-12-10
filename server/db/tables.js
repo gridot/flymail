@@ -38,7 +38,7 @@ const sql = 'insert into userTable (firstName, lastName, email, isAdmin, passwor
 const password = bcrypt.hashSync('admindot', 10);
 const variables = ['Admin', 'gritdot', 'gritdot@gmail.com', 'true', password];
 
-// class tableHandler {
+
 async function createTables() {
   const users = await pool.query(createUserTable);
   try {
