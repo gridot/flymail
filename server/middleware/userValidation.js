@@ -12,7 +12,9 @@ class Validator {
     let invalidInput;
     let emailExist = "";
 
-    const result = Joi.validate(request.body, signupSchema);
+    const result = Joi.validate(request.body, signupSchema, {
+      abortEarly: false
+    });
     if (result.error !== null) {
       errors.invalidInput = result.error.message;
     }
@@ -41,20 +43,15 @@ class Validator {
 
   static validateLOgin(request, response, next) {
     let { email, password } = request.body;
-    let emailExist = "";
     const errors = {};
     let invalidInput;
 
-    const result = Joi.validate(request.body, loginSchema);
+    const result = Joi.validate(request.body, loginSchema, {
+      abortEarly: false
+    });
     if (result.error !== null) {
       errors.invalidInput = result.error.message;
     }
-
-    pool.query(queryUsersByEmail, [email])
-      .then((data) => {
-        if (data.rowCount !== 0) {
-          errors.emailExist = "Email not found. Please signup"
-        }
         if (JSON.stringify(errors) !== '{}') {
           return response.status(400)
             .json({
@@ -64,12 +61,6 @@ class Validator {
             });
           }
       next()     
-    }) 
-      .catch(error => response.status(500)
-        .json({
-          success: false,
-          message: error.message
-        }));
   }
 }
 

@@ -19,7 +19,6 @@ const createParcelTable = `DROP TABLE IF EXISTS parcelTable;
     user_id INTEGER NOT NULL,
     FOREIGN KEY (user_id) references userTable(user_id) on delete cascade,
     parcelContent VARCHAR (128) NOT NULL,
-    placedBy INT NOT NULL,
     price FLOAT (11) NOT NULL,
     trackingID CHARACTER VARYING(100) NOT NULL,
     weight FLOAT (11) NOT NULL,
