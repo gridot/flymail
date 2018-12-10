@@ -52,19 +52,26 @@ async function createTables() {
   } catch (error) {
     console.log('parcel table not created');
   }
+  const admin = await pool.query(sql, variables);
+  try {
+    console.log('Admin inserted', admin);
+  } catch (error) {
+    console.log('Admin insertion failed');
+  }
+
 }
 
-function createAdmin() {
-  const create = pool.query(sql, variables)
-    .then((result => console.log(`Admin account ${result.command}ED`)))
-    .catch((error) => {
-      console.log(error);
-    });
-  return create;
-}
+// function createAdmin() {
+//   const create = pool.query(sql, variables)
+//     .then((result => console.log(`Admin account ${result.command}ED`)))
+//     .catch((error) => {
+//       console.log(error);
+//     });
+//   return create;
+// }
 // }
 
 // const { defaultTables, createAdmin } = tableHandler;
 createTables();
-createAdmin();
-export { createTables, createAdmin };
+// createAdmin();
+export default createTables;

@@ -1,5 +1,5 @@
 import pool from '../db/connection';
-import { createOrder } from '../db/sql';
+import { createOrder, selectAllOrders } from '../db/sql';
 import shortid from 'shortid';
 
 class OrderHandler {
@@ -31,8 +31,26 @@ class OrderHandler {
             message: error.message
           }));
     }
+
+    static getAllOrders(request, response) {
+      pool.query(selectAllOrders)
+        .then((result) => {
+          const allOrders = result.rows;
+          return response.status(200)
+            .json({
+              success: true,
+              message: 'All orders placed as of date',
+              allOrders
+            });
+        })
+        .catch(error => response.status(500)
+          .json({
+            success: false,
+            message: error.message
+          }));
+    }
 } 
   
-const { parcelOrders } = OrderHandler;
+const { parcelOrders, getAllOrders } = OrderHandler;
 
-export default parcelOrders;
+export {parcelOrders, getAllOrders};

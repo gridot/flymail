@@ -15,7 +15,20 @@ class Validator {
            }
            next();
     }
+
+    static getAllValidator(request, response, next) {
+      const { user_id } = request.params;
+      if (!Number(user_id) || user_id <= 0) {
+          return response.status(400)
+              .json({
+                  success: false,
+                  message: 'Invalid user id'
+              });
+      }
+      next();
+  }
+
 }
 
-const { validateOrder } = Validator;
-export default validateOrder;
+const { validateOrder, getAllValidator } = Validator;
+export {validateOrder, getAllValidator};
