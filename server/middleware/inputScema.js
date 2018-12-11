@@ -31,6 +31,11 @@ const signupSchema = {
     token: [Joi.string(), Joi.number()]
   }
 
+  const destinationUpdate = {
+    destination: Joi.string().required().error(new Error('Destination should be a string"')),
+    token: [Joi.string(), Joi.number()]
+  }
+
   
 
-  export {signupSchema, loginSchema, orderSchema, statusUpdate};
+  export {signupSchema, loginSchema, orderSchema, statusUpdate, destinationUpdate};

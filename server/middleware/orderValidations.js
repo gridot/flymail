@@ -1,5 +1,6 @@
 import Joi from 'joi';
-import {orderSchema, statusUpdate} from './inputScema';
+import {orderSchema, statusUpdate, destinationUpdate} from './inputScema';
+import jwt from 'jsonwebtoken';
 import pool from '../db/connection';
 import { queryOrdersById } from '../db/sql';
 import { stat } from 'fs';
@@ -68,7 +69,52 @@ class Validator {
         }));
   }
 
+  static updateDestination(request, response, next) {
+    
+    const {parcelId} = request.params;
+    pool.query(queryOrdersById, [parcelId])
+      .then((data) => {
+        if (data.rowCount === 0) {
+          return response.status(404)
+            .json({
+              success: false,
+              message: 'This parcel order does not exist'
+            });
+        }
+        if (data.rows[0].status === "Delivered"|| data.rows[0].status === 'Cancelled') {
+          return response.status(406)
+            .json({
+              success: false,
+              message: 'This parcel order is delivered or cancelled'
+            });
+        }
+        const userInfo = request.authData.payload;
+      if (userInfo.user_id !== data.rows[0].user_id) {
+      return response.status(401)
+      .json({
+        success: false,
+        message: 'You need to be the owner of this order to access this endpoint'
+      });
+  }
+        
+        const result = Joi.validate(request.body, destinationUpdate, { abortEarly: false });
+        if (result.error !== null) {
+          return response.status(400)
+          .json({
+            success: false,
+            message: result.error.message
+          });
+         }
+        next();
+      })
+      .catch(error => response.status(500)
+        .json({
+          success: false,
+          message: error.message
+        }));
+  }
+
 }
 
-const { validateOrder, getAllValidator, updateOrderValidator } = Validator;
-export {validateOrder, getAllValidator, updateOrderValidator};
+const { validateOrder, getAllValidator, updateOrderValidator, updateDestination } = Validator;
+export {validateOrder, getAllValidator, updateOrderValidator, updateDestination};

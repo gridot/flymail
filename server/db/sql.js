@@ -11,7 +11,9 @@ const selectAllOrders = `select parcelTable.id, parcelTable.receiver, parcelTabl
 
 const updateOrder = `UPDATE parcelTable set status = $1 where id = $2 returning *`;
 
+const updateDest = `UPDATE parcelTable set destination = $1 where id = $2 returning *`;
+
 export {
-  createUser, queryUsersByEmail, createOrder, selectAllOrders, queryOrdersById, updateOrder
+  createUser, queryUsersByEmail, createOrder, selectAllOrders, queryOrdersById, updateOrder, updateDest
 };
 
