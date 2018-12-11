@@ -1,5 +1,5 @@
 import pool from '../db/connection';
-import { createOrder, selectAllOrders, updateOrder } from '../db/sql';
+import { createOrder, selectAllOrders, updateOrder, updateDest } from '../db/sql';
 import shortid from 'shortid';
 
 class OrderHandler {
@@ -64,8 +64,22 @@ class OrderHandler {
             message: error.message
           }));
     }
+    static destination(request, response) {
+      const { parcelId } = request.params;
+      const value = request.body.destination;
+      pool.query(updateDest, [value, parcelId])
+        .then(() => response.status(200)
+          .json({
+            message: 'Order is updated'
+          }))
+        .catch(error => response.status(500)
+          .json({
+            status: 'Fail',
+            message: error.message
+          }));
+    }
 } 
   
-const { parcelOrders, getAllOrders, updateStatus } = OrderHandler;
+const { parcelOrders, getAllOrders, updateStatus, destination } = OrderHandler;
 
-export {parcelOrders, getAllOrders, updateStatus};
+export {parcelOrders, getAllOrders, updateStatus, destination};
