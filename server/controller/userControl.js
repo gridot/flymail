@@ -6,12 +6,11 @@ import pool from '../db/connection';
 
 class UserHandler {
   static userSignup(request, response) {
-    const { firstName, lastName, email, isadmin } = request.body;
+    const { firstName, lastName, email} = request.body;
     const values = [
       firstName,
       lastName,
       email,
-      isadmin,
       bcrypt.hashSync(request.body.password, 10)
     ];
 
