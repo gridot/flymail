@@ -27,20 +27,22 @@ const signupSchema = {
 
   }
   const statusUpdate = {
-    status: Joi.string().lowercase().valid(['Delivered', 'In-transit', 'Pending']).required().error(new Error('Status update should be one of these "Delivererd, In-transit or Pending"')),
+    status: Joi.string().regex(/[a-zA-Z]*$/).valid(['Delivered', 'In-transit', 'Pending']).required().error(new Error('Status update should be one of these "Delivererd, In-transit or Pending"')),
     token: [Joi.string(), Joi.number()]
   }
 
   const destinationUpdate = {
-    destination: Joi.string().required().error(new Error('Destination should be a string"')),
+    destination: Joi.string().regex(/[a-zA-Z]*$/).required().error(new Error('Destination should be a string"')),
     token: [Joi.string(), Joi.number()]
   }
 
   const locationUpdate = {
-    currentLocation: Joi.string().required().error(new Error('current location should be a string"')),
+    currentLocation: Joi.string().regex(/[a-zA-Z]*$/).required().error(new Error('current location should be a string"')),
     token: [Joi.string(), Joi.number()]
   }
 
-  
+  const paramScheme = {
+    parcelId:  Joi.number().error(new Error('Parcel id should be a number"'))
+  }
 
-  export {signupSchema, loginSchema, orderSchema, statusUpdate, destinationUpdate, locationUpdate};
+  export {signupSchema, loginSchema, orderSchema, statusUpdate, destinationUpdate, locationUpdate, paramScheme};

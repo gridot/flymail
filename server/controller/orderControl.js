@@ -1,5 +1,5 @@
 import pool from '../db/connection';
-import { createOrder, selectAllOrders, updateOrder, updateDest, updatelocal } from '../db/sql';
+import { createOrder, selectAllOrders, updateOrder, updateDest, updatelocal , queryByTrackingId} from '../db/sql';
 import shortid from 'shortid';
 
 class OrderHandler {
@@ -92,8 +92,27 @@ class OrderHandler {
             message: error.message
           }));
     }
+
+    static getSpecificOrder(request, response) {
+      const { trackingID } = request.params;
+       pool.query(queryByTrackingId, [trackingID])
+       .then((result) => {
+        const order = result.rows;
+        return response.status(200)
+          .json({
+            success: true,
+            message: 'Order with this ID',
+            order
+          });
+      })
+        .catch(error => response.status(500)
+          .json({
+            status: 'Fail',
+            message: error.message
+          }));
+    }
 } 
   
-const { parcelOrders, getAllOrders, updateStatus, destination, location } = OrderHandler;
+const { parcelOrders, getAllOrders, updateStatus, destination, location, getSpecificOrder } = OrderHandler;
 
-export {parcelOrders, getAllOrders, updateStatus, destination, location};
+export {parcelOrders, getAllOrders, updateStatus, destination, location, getSpecificOrder};

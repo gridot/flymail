@@ -1,8 +1,8 @@
 import Joi from 'joi';
-import {orderSchema, statusUpdate, destinationUpdate, locationUpdate} from './inputScema';
+import {orderSchema, statusUpdate, destinationUpdate, locationUpdate, paramScheme} from './inputScema';
 import jwt from 'jsonwebtoken';
 import pool from '../db/connection';
-import { queryOrdersById } from '../db/sql';
+import { queryOrdersById, queryByTrackingId } from '../db/sql';
 
 
 
@@ -150,7 +150,35 @@ class Validator {
         }));
   }
 
+  static getAparcel(request, response, next) {
+    const {trackingID} = request.params;
+    trackingID.trim();
+
+    if (trackingID.length !== 9 || !/^[a-z0-9]+$/i.test(trackingID)) {
+    return response.status(400)
+      .json({
+        success: false,
+        message: "invalid tracking ID"
+      });
+    }
+    pool.query(queryByTrackingId, [trackingID])
+      .then((data) => {
+        if (data.rowCount === 0) {
+          return response.status(404)
+            .json({
+              success: false,
+              message: 'This parcel order does not exist'
+            });
+        }
+        next();
+      })
+      .catch(error => response.status(500)
+        .json({
+          success: false,
+          message: error.message
+        }));
+  }
 }
 
-const { validateOrder, getAllValidator, updateOrderValidator, updateDestination, locationValidator } = Validator;
-export {validateOrder, getAllValidator, updateOrderValidator, updateDestination, locationValidator};
+const { validateOrder, getAllValidator, updateOrderValidator, updateDestination, locationValidator, getAparcel } = Validator;
+export {validateOrder, getAllValidator, updateOrderValidator, updateDestination, locationValidator, getAparcel};

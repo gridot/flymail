@@ -12,9 +12,12 @@ const selectAllOrders = `select parcelTable.id, parcelTable.receiver, parcelTabl
 const updateOrder = `UPDATE parcelTable set status = $1 where id = $2 returning *`;
 
 const updateDest = `UPDATE parcelTable set destination = $1 where id = $2 returning *`;
+
 const updatelocal = `UPDATE parcelTable set currentLocation = $1 where id = $2 returning *`;
 
+const queryByTrackingId = 'select * from parcelTable where trackingID = $1';
+
 export {
-  createUser, queryUsersByEmail, createOrder, selectAllOrders, queryOrdersById, updateOrder, updateDest, updatelocal
+  createUser, queryUsersByEmail, createOrder, selectAllOrders, queryOrdersById, updateOrder, updateDest, updatelocal, queryByTrackingId
 };
 
