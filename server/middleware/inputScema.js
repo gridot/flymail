@@ -36,6 +36,11 @@ const signupSchema = {
     token: [Joi.string(), Joi.number()]
   }
 
+  const locationUpdate = {
+    currentLocation: Joi.string().required().error(new Error('current location should be a string"')),
+    token: [Joi.string(), Joi.number()]
+  }
+
   
 
-  export {signupSchema, loginSchema, orderSchema, statusUpdate, destinationUpdate};
+  export {signupSchema, loginSchema, orderSchema, statusUpdate, destinationUpdate, locationUpdate};
