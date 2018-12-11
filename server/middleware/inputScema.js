@@ -26,7 +26,11 @@ const signupSchema = {
     token: [Joi.string(), Joi.number()]
 
   }
+  const statusUpdate = {
+    status: Joi.string().lowercase().valid(['Delivered', 'In-transit', 'Pending']).required().error(new Error('Status update should be one of these "Delivererd, In-transit or Pending"')),
+    token: [Joi.string(), Joi.number()]
+  }
 
   
 
-  export {signupSchema, loginSchema, orderSchema};
+  export {signupSchema, loginSchema, orderSchema, statusUpdate};
