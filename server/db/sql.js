@@ -17,7 +17,9 @@ const updatelocal = `UPDATE parcelTable set currentLocation = $1 where id = $2 r
 
 const queryByTrackingId = 'select * from parcelTable where trackingID = $1';
 
+const selectUserOrder = `select * from parcelTable where user_id = $1`;
+
 export {
-  createUser, queryUsersByEmail, createOrder, selectAllOrders, queryOrdersById, updateOrder, updateDest, updatelocal, queryByTrackingId
+  createUser, queryUsersByEmail, createOrder, selectAllOrders, queryOrdersById, updateOrder, updateDest, updatelocal, queryByTrackingId, selectUserOrder
 };
 
