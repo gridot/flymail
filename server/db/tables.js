@@ -38,6 +38,8 @@ const sql = 'insert into userTable (firstName, lastName, email, isAdmin, passwor
 const password = bcrypt.hashSync('admindot', 10);
 const variables = ['Admin', 'gritdot', 'gritdot@gmail.com', 'true', password];
 
+const values = ['Bakky', 'jany', 'codegirls@gmail.com', 'false', bcrypt.hashSync('janedot', 10)];
+
 
 async function createTables() {
   const users = await pool.query(createUserTable);
@@ -57,6 +59,13 @@ async function createTables() {
     console.log('Admin inserted', admin);
   } catch (error) {
     console.log('Admin insertion failed');
+  }
+
+  const user = await pool.query(sql, values);
+  try {
+    console.log('User inserted', admin);
+  } catch (error) {
+    console.log('User insertion failed');
   }
 
 }
