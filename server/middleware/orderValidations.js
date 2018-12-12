@@ -213,7 +213,36 @@ class Validator {
           message: error.message
         }));
   }
+
+  static deleteValidator(request, response, next) {
+    const { trackingID } = request.params;
+    trackingID.trim();
+
+    if (trackingID.length !== 9 || !/^[a-z0-9]+$/i.test(trackingID)) {
+      return response.status(400)
+        .json({
+          success: false,
+          message: "invalid tracking ID"
+        });
+    }
+    pool.query(queryByTrackingId, [trackingID])
+      .then((data) => {
+        if (data.rowCount === 0) {
+          return response.status(404)
+            .json({
+              success: false,
+              message: 'This parcel order does not exist'
+            });
+        }
+        next();
+      })
+      .catch(error => response.status(500)
+        .json({
+          success: false,
+          message: error.message
+        }));
+  }
 }
 
-const { validateOrder, getAllValidator, updateOrderValidator, updateDestination, locationValidator, getAparcel, cancelOrder } = Validator;
-export { validateOrder, getAllValidator, updateOrderValidator, updateDestination, locationValidator, getAparcel, cancelOrder };
+const { validateOrder, getAllValidator, updateOrderValidator, updateDestination, locationValidator, getAparcel, cancelOrder, deleteValidator } = Validator;
+export { validateOrder, getAllValidator, updateOrderValidator, updateDestination, locationValidator, getAparcel, cancelOrder, deleteValidator };
