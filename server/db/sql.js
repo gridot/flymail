@@ -19,7 +19,9 @@ const queryByTrackingId = 'select * from parcelTable where trackingID = $1';
 
 const selectUserOrder = `select * from parcelTable where user_id = $1`;
 
+const cancelOrder = `UPDATE parcelTable set status = $1 where id = $2 returning *`;
+
 export {
-  createUser, queryUsersByEmail, createOrder, selectAllOrders, queryOrdersById, updateOrder, updateDest, updatelocal, queryByTrackingId, selectUserOrder
+  createUser, queryUsersByEmail, createOrder, selectAllOrders, queryOrdersById, updateOrder, updateDest, updatelocal, queryByTrackingId, selectUserOrder, cancelOrder
 };
 

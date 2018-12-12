@@ -6,7 +6,7 @@ router.get('/api/v1', (request, response) => {
     return response.status(200)
     .json({
         success: true,
-        message: 'Welcome to SendIT, your package is safe with us'
+        message: 'Welcome to Flymail, your package is safe with us'
     });
 });
 
