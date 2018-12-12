@@ -138,3 +138,16 @@ describe('Test for Post parcel', () => {
 
 });
 
+describe('Test GET ALL ORDERS by Admin', () => {
+  it('Should return 200 for success', (done) => {
+    chai.request(app)
+      .get('/api/v1/parcels')
+      .set('authorization', adminToken)
+      .end((error, response) => {
+        expect(response).to.have.status(200);
+        expect(response.body).to.be.a('object');
+        expect(response.body).to.have.property('allOrders');
+        done();
+      });
+  });
+});
