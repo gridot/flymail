@@ -1,8 +1,8 @@
-import 'dotenv/config';
 import jwt from 'jsonwebtoken';
 
+
 const generateToken = (payload) => {
-  const token = jwt.sign({ payload }, process.env.JWT_SECRET, { expiresIn: '1d' });
+  const token = jwt.sign({ payload }, 'gritdotisthenameofourapp', { expiresIn: '1d' });
   return token;
 };
 
@@ -15,8 +15,7 @@ const verifyToken = (request, response, next) => {
         message: 'Please supply a token',
       });
   }
-  jwt.verify(token, process.env.JWT_SECRET, (error, authData) => {
-    console.log(authData);
+  jwt.verify(token, 'gritdotisthenameofourapp', (error, authData) => {
     if (error) {
       if (error.message.includes('signature')) {
         return response.status(403)
@@ -24,17 +23,25 @@ const verifyToken = (request, response, next) => {
             success: false,
             message: 'Your value is not a valid token. Please supply a valid one',
           });
-      }
-      return response.status(403)
-        .json({
-          message: 'error here'
-        });
+        }
     }
     request.authData = authData;
     return next();
   });
 };
 
+const parmitAdmin = (request, response, next) => {
+  const userInfo = request.authData.payload;
+  if (userInfo.isadmin === false) {
+    return response.status(401)
+      .json({
+        success: false,
+        message: 'You need Admin priviledge to access this endpoint'
+      });
+  }
+  next();
+};
+
 export {
-  generateToken, verifyToken
+  generateToken, verifyToken, parmitAdmin
 };

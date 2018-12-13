@@ -6,7 +6,6 @@ const createUserTable = `DROP TABLE IF EXISTS userTable, parcelTable CASCADE;
     user_id SERIAL PRIMARY KEY,
     firstName VARCHAR (128) NOT NULL,
     lastName VARCHAR (128) NOT NULL,
-    userName VARCHAR (128) NOT NULL,
     email VARCHAR (355) UNIQUE NOT NULL,
     registered TIMESTAMP NOT NULL DEFAULT (NOW()),
     isAdmin BOOLEAN NOT NULL DEFAULT (false),
@@ -20,7 +19,6 @@ const createParcelTable = `DROP TABLE IF EXISTS parcelTable;
     user_id INTEGER NOT NULL,
     FOREIGN KEY (user_id) references userTable(user_id) on delete cascade,
     parcelContent VARCHAR (128) NOT NULL,
-    placedBy INT NOT NULL,
     price FLOAT (11) NOT NULL,
     trackingID CHARACTER VARYING(100) NOT NULL,
     weight FLOAT (11) NOT NULL,
@@ -36,11 +34,13 @@ const createParcelTable = `DROP TABLE IF EXISTS parcelTable;
     deliveredOn VARCHAR
 )`;
 
-const sql = 'insert into userTable (firstName, lastName, userName, email, isAdmin, password) values ($1, $2, $3, $4, $5, $6)';
+const sql = 'insert into userTable (firstName, lastName, email, isAdmin, password) values ($1, $2, $3, $4, $5)';
 const password = bcrypt.hashSync('admindot', 10);
-const variables = ['Admin', 'gritdot', 'grit', 'gritdot@gmail.com', 'true', password];
+const variables = ['Admin', 'gritdot', 'gritdot@gmail.com', 'true', password];
 
-// class tableHandler {
+const values = ['Bakky', 'jany', 'codegirls@gmail.com', 'false', bcrypt.hashSync('janedot', 10)];
+
+
 async function createTables() {
   const users = await pool.query(createUserTable);
   try {
@@ -54,19 +54,33 @@ async function createTables() {
   } catch (error) {
     console.log('parcel table not created');
   }
+  const admin = await pool.query(sql, variables);
+  try {
+    console.log('Admin inserted', admin);
+  } catch (error) {
+    console.log('Admin insertion failed');
+  }
+
+  const user = await pool.query(sql, values);
+  try {
+    console.log('User inserted', admin);
+  } catch (error) {
+    console.log('User insertion failed');
+  }
+
 }
 
-function createAdmin() {
-  const create = pool.query(sql, variables)
-    .then((result => console.log(`Admin account ${result.command}ED`)))
-    .catch((error) => {
-      console.log(error);
-    });
-  return create;
-}
+// function createAdmin() {
+//   const create = pool.query(sql, variables)
+//     .then((result => console.log(`Admin account ${result.command}ED`)))
+//     .catch((error) => {
+//       console.log(error);
+//     });
+//   return create;
+// }
 // }
 
 // const { defaultTables, createAdmin } = tableHandler;
 createTables();
-createAdmin();
-export { createTables, createAdmin };
+// createAdmin();
+export default createTables;

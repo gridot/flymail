@@ -20,6 +20,6 @@ if (process.env.NODE_ENV === 'test:dev') {
 }
 console.log(process.env.NODE_ENV);
 const pool = new Pool(connect);
-pool.connect().then(() => console.log('connected to db'));
+// pool.connect().then(() => console.log('connected to db'));
 
 export default pool;

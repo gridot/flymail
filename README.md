@@ -1,5 +1,7 @@
 # flymail
 
+[![Build Status](https://travis-ci.com/gridot/flymail.svg?branch=develop)](https://travis-ci.com/gridot/flymail)[![Coverage Status](https://coveralls.io/repos/github/gridot/flymail/badge.svg?branch=develop)](https://coveralls.io/github/gridot/flymail?branch=develop)[![Maintainability](https://api.codeclimate.com/v1/badges/c7b57cf2efe22ce3bf08/maintainability)](https://codeclimate.com/github/gridot/flymail/maintainability)
+
 ## Description
 Flymail is a courier service that helps users deliver parcels to different destinations. In addition to that, the project is also geared
 towards helping the creators get familiar with node/express.js projects.

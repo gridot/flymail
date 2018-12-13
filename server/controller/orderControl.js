@@ -1,5 +1,5 @@
 import pool from '../db/connection';
-import { createOrder } from '../db/sql';
+import { createOrder, selectAllOrders, updateOrder, updateDest, updatelocal , queryByTrackingId, selectUserOrder, cancelOrder, deleteOrder} from '../db/sql';
 import shortid from 'shortid';
 
 class OrderHandler {
@@ -31,8 +31,144 @@ class OrderHandler {
             message: error.message
           }));
     }
+
+    static getAllOrders(request, response) {
+      pool.query(selectAllOrders)
+        .then((result) => {
+          const allOrders = result.rows;
+          return response.status(200)
+            .json({
+              success: true,
+              message: 'All orders placed as of date',
+              allOrders
+            });
+        })
+        .catch(error => response.status(500)
+          .json({
+            success: false,
+            message: error.message
+          }));
+    }
+
+    static updateStatus(request, response) {
+      const { parcelId } = request.params;
+      const value = request.body.status;
+      pool.query(updateOrder, [value, parcelId])
+        .then(() => response.status(200)
+          .json({
+            message: 'Order is updated'
+          }))
+        .catch(error => response.status(500)
+          .json({
+            status: 'Fail',
+            message: error.message
+          }));
+    }
+    static destination(request, response) {
+      const { parcelId } = request.params;
+      const value = request.body.destination;
+      pool.query(updateDest, [value, parcelId])
+        .then(() => response.status(200)
+          .json({
+            message: 'Order is updated'
+          }))
+        .catch(error => response.status(500)
+          .json({
+            status: 'Fail',
+            message: error.message
+          }));
+    }
+    static location(request, response) {
+      const { parcelId } = request.params;
+      const value = request.body.currentLocation;
+      pool.query(updatelocal, [value, parcelId])
+        .then(() => response.status(200)
+          .json({
+            message: 'Order is updated'
+          }))
+        .catch(error => response.status(500)
+          .json({
+            status: 'Fail',
+            message: error.message
+          }));
+    }
+
+    static getSpecificOrder(request, response) {
+      const { trackingID } = request.params;
+       pool.query(queryByTrackingId, [trackingID])
+       .then((result) => {
+        const order = result.rows;
+        return response.status(200)
+          .json({
+            success: true,
+            message: 'Order with this ID',
+            order
+          });
+      })
+        .catch(error => response.status(500)
+          .json({
+            status: 'Fail',
+            message: error.message
+          }));
+    }
+
+    static getUserOrders(request, response) {
+      const { user_id } = request.params;
+      pool.query(selectUserOrder , [user_id])
+        .then((result) => {
+          const allOrders = result.rows;
+          return response.status(200)
+            .json({
+              success: true,
+              message: 'All orders placed as of date',
+              allOrders
+            });
+        })
+        .catch(error => response.status(500)
+          .json({
+            success: false,
+            message: error.message
+          }));
+    }
+
+    static cancelUserOrder(request, response) {
+      const { parcelId } = request.params;
+      const status = 'Cancelled';
+      pool.query(cancelOrder , [status, parcelId])
+        .then((result) => {
+          const cancelledOrder = result.rows;
+          return response.status(200)
+            .json({
+              success: true,
+              message: 'This order is cancelled',
+              cancelledOrder
+            });
+        })
+        .catch(error => response.status(500)
+          .json({
+            success: false,
+            message: error.message
+          }));
+    }
+
+    static deleteAnOrder(request, response) {
+      const { trackingID} = request.params;
+      pool.query(deleteOrder, [trackingID])
+        .then((result) => {
+          return response.status(200)
+            .json({
+              success: true,
+              message: 'This order is deleted',
+            });
+        })
+        .catch(error => response.status(500)
+          .json({
+            success: false,
+            message: error.message
+          }));
+    }
 } 
   
-const { parcelOrders } = OrderHandler;
+const { parcelOrders, getAllOrders, updateStatus, destination, location, getSpecificOrder, getUserOrders, cancelUserOrder, deleteAnOrder } = OrderHandler;
 
-export default parcelOrders;
+export {parcelOrders, getAllOrders, updateStatus, destination, location, getSpecificOrder, getUserOrders, cancelUserOrder, deleteAnOrder};
