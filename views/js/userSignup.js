@@ -23,7 +23,8 @@ let password = document.getElementById('password').value;
   if (event.target === signupBtn) {
 
     // BaseURL
- const url = `http://localhost:5400/api/v1/auth/signup?`;
+//  const url = `http://localhost:5400/api/v1/auth/signup?`;
+  const url = `https://gritdot.herokuapp.com/api/v1/auth/signup?`
  
      // The data we are going to send in our request
      let data = {
