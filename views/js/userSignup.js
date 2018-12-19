@@ -1,70 +1,74 @@
-let signupBtn  = document.getElementById('signup-btn');
-const alert = document.getElementById('alert');
-const signup = (event) => {
-  event.preventDefault();
-  if (event.target === signupBtn) {
-const url = `http://localhost:5400/api/v1/parcels?`;
-// fetch(url)
-//   .then((resp) => resp.json())
-//   .then(function(data) {
-//     let authors = data.results;
-//     return authors.map(function(author) {
-//       // let li = createNode('li'),
-//       //     img = createNode('img'),
-//       //     span = createNode('span');
-//       // img.src = author.picture.medium;
-//       alert.innerHTML = `${author.weight} ${author.metric}`;
-//       console.log(JSON.stringify(authors));
-//     })
-//   })
-//   .catch(function(error) {
-//     console.log(error);
-//   });   
-// }
-
-fetch(url)
-    .then(function (res) {
-        let co = res.json();
-        console.log(co);
-    })
-  //   "allOrders": [
-  //     {
-  //         "id": 1,
-  //         "receiver": "Jonah Fish",
-  //         "trackingid": "l0_XQxQV7",
-  //         "parcelcontent": "A bag of rice",
-  //         "weight": 2,
-  //         "pickuplocation": "12 Seriki Amass",
-  //         "destination": "20 Jupiter Road",
-  //         "currentlocation": "Lagos",
-  //         "price": 1000,
-  //         "senton": "2018-12-13T17:07:17.182Z",
-  //         "metric": "kg",
-  //         "user_id": 2,
-  //         "email": "cowgirl@gmail.com",
-  //         "status": "Pending"
-  //     }
-  // ]
-    .then(function (data) {
-      let result = `<h2> User Info From AllOrders </h2>`;
-      for (val in data) {
-            result +=
-            `<div>
-                <h5> User ID: ${data[val].id} </h5>
-                <ul class="w3-ul">
-                    <li> User Name : ${data[val].receiver}</li>
-                    <li> parcel Status: ${data[val].status} </li>
-                </ul>
-            </div>`;
-
-            console.log(result);
-        };
-       
-       })
-       
-}
-}    
-  
-     document.getElementById('signup-box').addEventListener('click', signup);
-
+// Funct. to display error to user
+const displayError = (feedback)  => {
+  const alert = document.getElementById('alert');
+  alert.innerHTML = feedback;
+  alert.style.display = 'inline-block';
  
+}
+
+// Funct. that processes fetch api call
+const signup = (event) => {
+  // Get signup submit btn
+let signupBtn  = document.getElementById('signup-btn');
+// Inputs from user
+let firstName = document.getElementById('firstname').value;
+let lastName = document.getElementById('lastname').value;
+let email = document.getElementById('email').value;
+let password = document.getElementById('password').value;
+
+//This prevents submit btn default action until requirement is met
+  event.preventDefault();
+
+  // When submit is clicked 
+  if (event.target === signupBtn) {
+
+    // BaseURL
+ const url = `http://localhost:5400/api/v1/auth/signup?`;
+ 
+     // The data we are going to send in our request
+     let data = {
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      password: password
+  }
+  // console.log(JSON.stringify(data));
+  
+  // The parameters we are going to pass to the fetch function
+  let fetchData = { 
+      method: 'POST', 
+      body: JSON.stringify(data),
+      headers: {
+        Accept: 'application/json, text/plain, */*',
+        'Content-type': 'application/json'
+      }
+  }
+  fetch(url, fetchData)
+
+    // Handle response you get from the server
+  .then(response => response.json())
+  .then((data) => {
+      let errMsg = '';
+      // Send the error msg gotten if any to user
+      errMsg = 'Please make sure to input correct values';
+      if (data.message === errMsg) {
+        let err = data.errors;
+
+        displayError(JSON.stringify(err.invalidInput));
+        return;
+      }else {
+        // Else save token generated in localStorage
+        localStorage.setItem('token', data.token);
+        // And redirect user to Create parcel page
+        location.assign('parcel.html');
+      }
+
+  })
+
+}   
+} 
+
+  
+document.getElementById('signup-box').addEventListener('click', signup);
+
+    
