@@ -33,7 +33,6 @@ let password = document.getElementById('password').value;
       email: email,
       password: password
   }
-  // console.log(JSON.stringify(data));
   
   // The parameters we are going to pass to the fetch function
   let fetchData = { 
