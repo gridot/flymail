@@ -39,37 +39,40 @@
 <div id="add-parcel-wrap">
 
     <div class="add-parcel-item">
-        <form3 action="admin-food-items.html">
-                <legend>Add a Parcel</legend>
-            <label for="receiver-name">Receiver Name</label>
-            <input type="text" placeholder="Receiver name" required="">
-            <label for="description">Content Description</label>
-            <input type="text" placeholder="Describe content" required="">
+        <form id="parcel-form">
+            <legend>Add a Parcel</legend>
+            <p id="alert"></p>
+            <label for="receiver">Receiver Name</label>
+            <input id="receiver" type="text" placeholder="Receiver name" required="">
+            <label for="parcel-content">Content Description</label>
+            <input id="parcel-content" type="text" placeholder="Describe content" required="">
             <div class="sub-input">
                 <div class="weight">
                     <label for="weight">Weight</label>
-                    <input type="text" placeholder="weight" required="">
+                    <input id="weight" type="text" placeholder="weight" required="">
                 </div>
                 <div class="quantity">
-                    <label for="quantity">Quantity</label>
-                    <input type="number" placeholder="Available quantity" required="">
+                    <label for="metric">Metric</label>
+                    <select>
+                        <option id="kg" value="kg">Kg</option>
+                    </select>
                 </div>
             </div>
-            <label for="parcel-type">Parcel Type</label>
-            <input type="text" placeholder="parcel type" required="">
-            <label for="email">Email</label>
-            <input type="email" placeholder="email" required="">
-            <label for="phone">Destination Phone: </label>
-            <input type="phone" name="phone" class="phone" id="phone" required="" placeholder="Phone (+234090.....)">
-            <label for="address"> Pickup Address: </label>
-            <input type="text" name="address" class="address" id="pickup" placeholder="Pickup Address" required="">
+            <label for="pickup">Pickup</label>
+            <input id="pickup" type="text" placeholder="12 Anazodo Str..." required="">
             <label for="destination">Destination Address: </label>
-            <input type="text" class="address" id="destination" name="address" required="" placeholder="Add destination">
-            <input type="submit" value="Submit">
+            <input type="text" class="address" id="destination" name="address" required="" placeholder="4 Jusada Rd...">
+            <label for="email">Email</label>
+            <input id="email" type="email" placeholder="email" required="">
+            <label for="phone">Destination Phone: </label>
+            <input id="phone" type="phone" name="phone" class="phone" id="phone" required="" placeholder="Phone (+234090.....)">         
+            <button id="submit"  type="submit">Submit</button>
         
 
-    </form3></div>
+    </form>
 </div>
+</div>
+<script src="js/postOrder.js"></script>
 </body>
 
 </html>

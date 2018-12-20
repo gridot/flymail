@@ -124,7 +124,7 @@ header a:hover{
        text-align: center;
        font-size: 1.5em;
    }
-  form3 {
+  #parcel-form {
     display: flex;
     flex-direction: column;
     background: transparent;
@@ -132,13 +132,13 @@ header a:hover{
     border-radius: 5px;
   }
   
-  form3 label {
+  #parcel-form label {
     color: gray;
     margin-bottom: 10px;
     font-weight: bold;
   }
   
-  form3 input, input[type=email], .address, input[type=phone] {
+  #parcel-form input, input[type=email], .address, input[type=phone] {
     padding: 10px;
     border-radius: 2px;
     outline: none;
@@ -149,7 +149,7 @@ header a:hover{
     box-shadow: 1px 1px 2px 1px gainsboro;
   }
   
-  form3 input[type='submit'] {
+  #submit {
     background: green;
     color: #fff;
     font-weight: bold;
@@ -164,15 +164,20 @@ header a:hover{
     width: 100%
   }
   
-  .weight, .quantity {
+  .weight{
     display: flex;
     flex: 1;
     flex-direction: column;
   }
   .quantity {
-      text-align: end;
+      /* text-align: end; */
+      margin-top: 30px;
       margin-left: 10px;
   }
+#alert {
+    color: red;
+  
+}
 footer {
     text-align: center;
 }

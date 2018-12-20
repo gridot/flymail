@@ -8,7 +8,7 @@ towards helping the creators get familiar with node/express.js projects.
 
 <br/><b>Pivotal Tracker Stories (PROJECT PLAN)</br> https://www.pivotaltracker.com/n/projects/2228843
 <br/><b>Hosted API on Heroku: </br> https://gritdot.herokuapp.com/
-<br/><b>Pages: </br>https://gridot.github.io/flymail/UI/index.html
+<br/><b>Pages: </br>https://gridot.github.io/flymail/views/index.html
 
 
 ## Features

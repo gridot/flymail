@@ -14,7 +14,8 @@ class Validator {
       return response.status(400)
         .json({
           success: false,
-          message: result.error.message
+          message: "Please make sure to input correct values",
+          error: result.error.message
         });
     }
     next();

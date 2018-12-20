@@ -9,7 +9,7 @@ const displayError = (feedback)  => {
 // Funct. that processes fetch api call
 const signup = (event) => {
   // Get signup submit btn
-let signupBtn  = document.getElementById('signup-btn');
+let signupBtn  = document.getElementById('signup');
 // Inputs from user
 let firstName = document.getElementById('firstname').value;
 let lastName = document.getElementById('lastname').value;
@@ -33,7 +33,6 @@ let password = document.getElementById('password').value;
       email: email,
       password: password
   }
-  // console.log(JSON.stringify(data));
   
   // The parameters we are going to pass to the fetch function
   let fetchData = { 
@@ -69,7 +68,7 @@ let password = document.getElementById('password').value;
 }   
 } 
 
-  
-document.getElementById('signup-box').addEventListener('click', signup);
+  // Attach the function to login form
+document.getElementById('signup-form').addEventListener('click', signup);
 
     
