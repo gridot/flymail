@@ -16,16 +16,16 @@ body {
   flex-direction: column;
   color: #194c5c;
 }
-.signup-box {
+#signup-box {
   width: 400px;
   padding: 25px;
   box-shadow: 0px 1px 4px 0px #00000038, 0px 1px 4px 0px #194c5c85;
 }
-.signup-box p{
+#signup-box p{
   margin-top: 10px;
   text-align: center;
 }
-.signup-box a{
+#signup-box a{
   text-decoration: none;
   color: #32a0c2;
   margin-top: 8px;
@@ -38,7 +38,7 @@ label {
   font-size: 16px;
   padding-left: 3px;
 }
-.signup-btn {
+#signup-btn {
   margin: 0 auto;
   display: block;
   margin-top: 20px;
