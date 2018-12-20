@@ -6,7 +6,7 @@ import {parcelOrders, getAllOrders, updateStatus, destination, location, getSpec
 const orderRouter = express.Router();
 
 orderRouter.post('/parcels', verifyToken, validateOrder, parcelOrders);
-orderRouter.get('/parcels',verifyToken, parmitAdmin, getAllOrders);
+orderRouter.get('/parcels', getAllOrders);
 orderRouter.get('/parcels/:trackingID', verifyToken, getAparcel, getSpecificOrder);
 orderRouter.get('/users/:user_id/parcels', verifyToken, getUserOrders);
 orderRouter.put('/parcels/:parcelId/status', verifyToken, parmitAdmin, updateOrderValidator, updateStatus);

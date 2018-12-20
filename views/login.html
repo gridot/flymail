@@ -39,21 +39,25 @@
     </header>
     <div class="signup-form">
           <div class="text">
-              <h1>Login Here</h1>
+              <h1>Create Your Account</h1>
           </div>  
-          <form id="login-form" class='signup-box'>
+          <form action="/" method="post" class='signup-box'>
     
-            <p id="alert"></p>
+            <label for="firstname">First Name</label>
+            <input type="text" id="firstName" required autocomplete="off" placeholder="First Name" />
+    
+            <label for="lastname">Last Name</label>
+            <input type="text" id="lastName" required autocomplete="off" placeholder="Last Name" />
+    
             <label for="email">Email</label>
-            <input id="email" type="email" required autocomplete="off" placeholder="Email"/>
+            <input type="email" id="email" required autocomplete="off" placeholder="Email"/>
     
             <label for="password">Password</label>
-            <input id="password" type="text" required autocomplete="off" placeholder="Password"/>
+            <input type="text" id="password" required autocomplete="off" placeholder="Password"/>
     
-            <button id="login" class='signup-btn' type="submit"> LOGIN </button>
-            <p> Don't have an account, register <a href="signup.html">here</a></p>
+            <button class='signup-btn' type="submit"> SIGNUP </button>
+            <p> Already have an account, login <a href="login.html">here</a></p>
           </form>
     </div>
-    <script src="js/userLogin.js"></script>
 </body>
 </html>
